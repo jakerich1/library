@@ -4,21 +4,40 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="reset.css">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
-        
-        <script src="script.js"></script>
-    </body>
+
+    <main>
+        <h1>My Library</h1>
+        <button id="add">New Book</button>
+        <form id="addForm" class="hidden" onsubmit="return false;">
+            <input id="titleIn" placeholder="Enter title" type="text">
+            <input id="authorIn" placeholder="Enter author name" type="text">
+            <input id="pageIn" placeholder="Enter page count" type="number">
+            <p>Has the book been read?</p>
+            <input id="readYes" type="radio" name="read"> Yes<br>
+            <input id="readNo" type="radio" name="read"> No<br>
+            <button id="submit">Submit</button>
+        </form>
+        <section>
+        </section>
+    </main>
+
+
+    <script src="script.js"></script>
+</body>
+
 </html>
