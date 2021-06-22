@@ -33,16 +33,16 @@ let myLibrary = [{
 
 displayLibrary()
 
-function Book(title, author, pages, read) {
+class Book {
 
-  this.title = title
-  this.author = author
-  this.pages = pages
-  this.read = read
+  constructor(title, author, pages, read) {
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.read = read
+  }
 
 }
-
-
 
 function addBookToLibrary(title, author, pages, read) {
 
@@ -166,13 +166,13 @@ function submitForm() {
 }
 
 
-function deleteCard(index){
+function deleteCard(index) {
   myLibrary.splice(index, 1)
   displayLibrary()
 }
 
 
-function changeRead(index){
+function changeRead(index) {
   myLibrary[index].read = !myLibrary[index].read
   displayLibrary()
 }
