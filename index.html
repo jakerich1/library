@@ -23,16 +23,29 @@
     <main>
         <h1>My Library</h1>
         <button id="add">New Book</button>
-        <form id="addForm" class="hidden" onsubmit="return false;">
-            <input id="titleIn" placeholder="Enter title" type="text">
-            <input id="authorIn" placeholder="Enter author name" type="text">
-            <input id="pageIn" placeholder="Enter page count" type="number">
+
+        <form id="addForm" class="hidden" onsubmit="return false;" novalidate>
+
+            <input required id="titleIn" placeholder="Enter title" type="text">
+            <span id="titleInError" class="error" aria-live="polite"></span>
+
+            <input required id="authorIn" placeholder="Enter author name" type="text">
+            <span id="authorInError" class="error" aria-live="polite"></span>
+
+            <input required id="pageIn" min="0" placeholder="Enter page count" type="number">
+            <span id="pageInError" class="error" aria-live="polite"></span>
+
             <p>Has the book been read?</p>
-            <input id="readYes" type="radio" name="read"> Yes<br>
-            <input id="readNo" type="radio" name="read"> No<br>
+            <input required id="readYes" type="radio" name="read"> Yes<br>
+            <input required id="readNo" type="radio" name="read"> No<br>
+            <span id="readError" class="error" aria-live="polite"></span>
+
             <button id="submit">Submit</button>
+
         </form>
+
         <section>
+
         </section>
     </main>
 

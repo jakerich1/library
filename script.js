@@ -52,8 +52,6 @@ function addBookToLibrary(title, author, pages, read) {
 
 }
 
-
-
 function displayLibrary() {
 
   const cardArea = document.querySelector("section")
@@ -131,38 +129,86 @@ function writeCard(element, cardArea, index) {
 
 }
 
-
-
 function displayForm() {
   const form = document.getElementById("addForm")
   form.classList.toggle("hidden")
 }
 
+//Get values from form inputs
+const titleInput = document.querySelector("#titleIn")
+const authorInput = document.querySelector("#authorIn")
+const pageCount = document.querySelector("#pageIn")
+const readYes = document.querySelector("#readYes")
+const readNo = document.querySelector("#readNo")
+
+const inputError = document.querySelector("#titleInError")
+const authorError = document.querySelector("#authorInError")
+const pageError = document.querySelector("#pageInError")
+const readError = document.querySelector("#readError")
+
+titleInput.addEventListener("input", function (event) {
+  if (titleInput.validity.valid) {
+    inputError.textContent = "";
+    inputError.className = "error";
+  } else {
+    showTitleError();
+  }
+});
+
+function showTitleError() {
+  if (titleInput.validity.valueMissing) {
+    inputError.textContent = "You need to enter a book title.";
+  }
+  inputError.className = "error active";
+}
+
+authorInput.addEventListener("input", function (event) {
+  if (authorInput.validity.valid) {
+    authorError.textContent = "";
+    authorError.className = "error";
+  } else {
+    showAuthorError();
+  }
+});
+
+function showAuthorError() {
+  if (authorInput.validity.valueMissing) {
+    authorError.textContent = "You need to enter an author's name.";
+  }
+  authorError.className = "error active";
+}
+
+pageCount.addEventListener("input", function (event) {
+  if (pageCount.validity.valid) {
+    pageError.textContent = "";
+    pageError.className = "error";
+  } else {
+    showPageError();
+  }
+});
+
+function showPageError() {
+  if (pageCount.validity.valueMissing) {
+    pageError.textContent = "You need to enter a page number.";
+  }
+  pageError.className = "error active";
+}
 
 
 function submitForm() {
 
-  //Get values from form inputs
-  const titleInput = document.querySelector("#titleIn").value
-  const authorInput = document.querySelector("#authorIn").value
-  const pageCount = document.querySelector("#pageIn").value
-  const readYes = document.querySelector("#readYes").checked
-  const readNo = document.querySelector("#readNo").checked
-
-  //check if radio options are not checked
-  let emptyRadio = false
-  if (!readYes && !readNo) {
-    emptyRadio = true
+  if (!titleInput.validity.valid) {
+    showTitleError();
+    return
+  } else if (!authorInput.validity.valid) {
+    showAuthorError()
+    return
+  } else if (!pageCount.validity.valid) {
+    showPageError()
+    return
   }
 
-  //check if any of the form elements are empty
-  if (titleInput == "" || authorInput == "" || pageCount == "" || emptyRadio) {
-    console.log("Missing input")
-  } else {
-    let read = (readYes == true) ? true : false
-    addBookToLibrary(titleInput, authorInput, pageCount, read)
-  }
-
+  addBookToLibrary(titleInput.value, authorInput.value, pageCount.value, false)
 }
 
 
