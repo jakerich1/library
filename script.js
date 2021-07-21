@@ -1,3 +1,92 @@
+function createUser(email, password) {
+
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in 
+      var user = userCredential.user;
+      console.log(user)
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+
+      console.log(errorMessage)
+      // ..
+    });
+
+}
+
+function signIn(email, password) {
+
+  firebase.auth().signInWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      // Signed in
+      var user = userCredential.user;
+      console.log(user)
+      // ...
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorMessage)
+    });
+
+}
+
+function signOut() {
+  firebase.auth().signOut().then(function () {
+    console.log('Signed Out');
+  }, function (error) {
+    console.error('Sign Out Error', error);
+  });
+}
+
+function googleSignIn() {
+
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  firebase.auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      /** @type {firebase.auth.OAuthCredential} */
+      var credential = result.credential;
+
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      console.log(user.uid)
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      console.log(error)
+      // ...
+    });
+}
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    var uid = user.uid;
+    console.log(uid)
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    console.log('signedout')
+  }
+});
+
+
+
 //Declaration and event listener for form toggle
 const newBook = document.querySelector("#add")
 newBook.addEventListener("click", function () {
@@ -31,6 +120,7 @@ let myLibrary = [{
   }
 ];
 
+// Initialize display
 displayLibrary()
 
 class Book {
